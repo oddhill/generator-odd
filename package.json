@@ -1,0 +1,29 @@
+{
+  "name": "generator-odd",
+  "version": "0.1.0",
+  "description": "Yo generator for odd (hill) things :)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jenslind/generator-odd.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "files": [
+    "app",
+    "drupal",
+    "baby"
+  ],
+  "author": "Jens Lind <jens@jensl.se> (jenslind.org)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jenslind/generator-odd/issues"
+  },
+  "homepage": "https://github.com/jenslind/generator-odd",
+  "dependencies": {
+    "yeoman-generator": "^0.19.1"
+  }
+}
