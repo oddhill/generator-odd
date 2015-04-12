@@ -1,0 +1,2 @@
+# generator-odd
+Yo.Odd
