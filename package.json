@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/jenslind/generator-odd",
   "dependencies": {
+    "nodegit": "^0.3.3",
     "yeoman-generator": "^0.19.1"
   }
 }
