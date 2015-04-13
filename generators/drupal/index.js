@@ -28,15 +28,27 @@ module.exports = generators.Base.extend({
     });
 
     // Clone odddrupal to cwd
-    git.Clone.clone('https://github.com/oddhill/odddrupal', cwd, null).then(function(repository) {
-      // Make sure we can use it later.
-      repo = repository;
+    var options = {
+      remoteCallbacks: {
+        certificateCheck: function() {
+          return 1;
+        }
+      }
+    };
+    git.Clone.clone('https://github.com/oddhill/odddrupal.git', cwd, options)
+      .then(function(repository) {
+        // Make sure we can use it later.
+        repo = repository;
 
-      // Remove remote
-      git.Remote.delete(repo, 'origin');
-
-      console.log('Cloned odddrupal into ' + cwd);
-    });
+        // Remove remote
+        git.Remote.delete(repo, 'origin').then(function() {
+          console.log('Done');
+        });
+      }
+    ).catch(function(err) {
+      console.log('Waow, sry something went wrong. :(');
+      return;
+    }).done();
   },
 
   // Rename current branch to master
