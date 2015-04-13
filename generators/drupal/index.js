@@ -14,6 +14,7 @@ module.exports = generators.Base.extend({
   // Clone https://github.com/oddhill/odddrupal.git.
   // And rename origin to odddrupal.
   clone: function () {
+    var done = this.async();
     // Check if cwd is empty or not.
     var files = fse.readdirSync(cwd);
     if (files.length > 0) {
@@ -32,20 +33,17 @@ module.exports = generators.Base.extend({
         }
       }
     };
-    git.Clone.clone('https://github.com/oddhill/odddrupal.git', cwd, options)
-      .then(function(repository) {
-        // Make sure we can use it later.
-        repo = repository;
 
-        // Remove remote
-        git.Remote.delete(repo, 'origin').then(function() {
-          console.log('Done');
-        });
-      }
-    ).catch(function(err) {
-      console.log('Waow, sry something went wrong. :(');
-      return;
-    }).done();
+    git.Clone.clone('https://github.com/oddhill/odddrupal.git', cwd, options).then(function(repository) {
+      // Make sure we can use it later.
+      repo = repository;
+
+      console.log('Done');
+      done();
+
+      // @TODO
+      // Remove origin remote
+    });
   },
 
   // Rename current branch to master
