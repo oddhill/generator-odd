@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/jenslind/generator-odd",
   "dependencies": {
+    "fs-extra": "^0.18.0",
+    "mysql": "^2.6.1",
     "nodegit": "^0.3.3",
     "yeoman-generator": "^0.19.1"
   }
