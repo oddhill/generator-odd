@@ -19,6 +19,11 @@ module.exports = generators.Base.extend({
       console.log(err);
       if (err) {
         // quit
+        console.error('Current dir not empty! Emergency, quits.');
+        return;
+      }
+      else {
+        console.log('Cloning odddrupal to ' + cwd + ' ...');
       }
     });
 
