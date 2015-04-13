@@ -15,17 +15,14 @@ module.exports = generators.Base.extend({
   // And rename origin to odddrupal.
   clone: function () {
     // Check if cwd is empty or not.
-    fse.emptyDirSync(cwd, function(err) {
-      console.log(err);
-      if (err) {
-        // quit
-        console.error('Current dir not empty! Emergency, quits.');
-        return;
-      }
-      else {
-        console.log('Cloning odddrupal to ' + cwd + ' ...');
-      }
-    });
+    var files = fse.readdirSync(cwd);
+    if (files.length > 0) {
+      // quit
+      console.error('Current dir not empty! Emergency, quits.');
+      return;
+    }
+    
+    console.log('Cloning odddrupal to ' + cwd + '...');
 
     // Clone odddrupal to cwd
     var options = {
