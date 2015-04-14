@@ -2,6 +2,7 @@ var generators = require('yeoman-generator');
 var git = require('nodegit');
 var fse = require('fs-extra');
 var mysql = require('mysql');
+var exec = require('child_process').exec;
 
 // Vars
 var repo = null;
@@ -38,11 +39,22 @@ module.exports = generators.Base.extend({
       // Make sure we can use it later.
       repo = repository;
 
-      console.log('Done');
-      done();
-
       // @TODO
-      // Remove origin remote
+      // The removal sohuld probably be done through nodegit, instead.
+
+      // Remove origin remote ref
+      var command = 'cd ' + cwd + ' && git remote rm origin';
+      exec(command, function(err, stdout, stderr) {
+        if (!err) {
+          console.log('Done');
+        }
+        else {
+          console.error('Unable to remove origin remote reference.');
+        }
+
+        // Continue
+        done();
+      });
     });
   },
 
