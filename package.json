@@ -27,6 +27,7 @@
     "fs-extra": "^0.18.0",
     "mysql": "^2.6.1",
     "nodegit": "^0.3.3",
+    "replace": "^0.3.0",
     "yeoman-generator": "^0.19.1"
   }
 }
