@@ -76,9 +76,11 @@ module.exports = generators.Base.extend({
 
   // Copy .htaccess.default to .htaccess.
   htaccess: function () {
-    fse.copy(cwd + '.htaccess.default', cwd + '.htaccess', function(err) {
+    var done = this.async();
+    fse.copy(cwd + '/.htaccess.default', cwd + '/.htaccess', function(err) {
       if (!err) {
         console.log('Copied .htaccess.default to .htaccess');
+        done();
       }
     });
   },
