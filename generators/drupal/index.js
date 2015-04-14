@@ -113,9 +113,12 @@ module.exports = generators.Base.extend({
 
   // Copy sites/default/settings.local.php.default to settings.local.php.
   dbSettings: function () {
-    fse.copy(cwd + 'sites/default/settings.local.php.default', cwd + 'sites/default/settings.local.php', function(err) {
+    var done = this.async();
+    fse.copy(cwd + '/sites/default/settings.local.php.default', cwd + '/sites/default/settings.local.php', function(err) {
       if (!err) {
         console.log('Copied settings.local.php.default to settings.local.php');
+
+        done();
 
         // @TODO:
         // Add db settings to file.
