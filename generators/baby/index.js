@@ -27,7 +27,7 @@ module.exports = generators.Base.extend({
     git.Clone.clone('https://github.com/oddhill/oddbaby.git', './', options).then(function(repository) {
       // Remove .git
       fse.unlink('./.git', function() {
-        console.log('Done');
+        this.log('Done');
         done();
       });
     });
@@ -37,7 +37,7 @@ module.exports = generators.Base.extend({
     // Rename oddbaby.info till NAME.info.
     fse.move('oddbaby.info', theme_name + '.info', function(err) {
       if (!err) {
-        console.log('Renamed oddbaby.info to ' + theme_name + '.info');
+        this.log('Renamed oddbaby.info to ' + theme_name + '.info');
 
         // @TODO:
         // Rename Odd baby name in info file.
