@@ -103,6 +103,9 @@ module.exports = generators.Base.extend({
       if (!err) {
         console.log('Added a new database named ' + db_name + '.');
       }
+      else if (err.code == 'ER_DB_CREATE_EXISTS') {
+        console.error('Db already exists');
+      }
     });
 
     connection.end();
