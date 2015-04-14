@@ -85,32 +85,6 @@ module.exports = generators.Base.extend({
     });
   },
 
-  // Create a new mysql db.
-  createDb: function () {
-    // Connect to mysql
-    var connection = mysql.createConnection({
-      host: '127.0.0.1',
-      user: 'root',
-      password: ''
-    });
-
-    connection.connect();
-
-    var db_name = cwd.split('/');
-    db_name = db_name[db_name.length-1];
-
-    connection.query('CREATE DATABASE ' + db_name, function (err) {
-      if (!err) {
-        console.log('Added a new database named ' + db_name + '.');
-      }
-      else if (err.code == 'ER_DB_CREATE_EXISTS') {
-        console.error('Db already exists');
-      }
-    });
-
-    connection.end();
-  },
-
   // Copy sites/default/settings.local.php.default to settings.local.php.
   dbSettings: function () {
     var done = this.async();
@@ -119,9 +93,6 @@ module.exports = generators.Base.extend({
         console.log('Copied settings.local.php.default to settings.local.php');
 
         done();
-
-        // @TODO:
-        // Add db settings to file.
       }
     });
   },
