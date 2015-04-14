@@ -128,10 +128,14 @@ module.exports = generators.Base.extend({
 
   // Make sure the files folder (sites/all/files) is 777.
   filesChmod: function () {
-    fse.ensureDirSync(cwd + 'sites/all/files', function(err) {
+    var done = this.async();
+    fse.ensureDirSync(cwd + '/sites/all/files', function(err) {
       if (!err) {
-        fse.chmodSync(cwd + 'sites/all/files', 777);
+        fse.chmodSync(cwd + '/sites/all/files', 777);
         console.log('Created files dir');
+
+        // Continue
+        done();
       }
     });
   }
