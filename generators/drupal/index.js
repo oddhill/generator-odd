@@ -60,12 +60,14 @@ module.exports = generators.Base.extend({
 
   // Rename current branch to master
   createMaster: function () {
+    var done = this.async();
     console.log('Renaming the 7.x branch to master...');
     // Rename current local branch to master
-    git.Branch.lookup(repo, '7.x', git.Branch.GIT_BRANCH_LOCAL).then(function(branchRef) {
+    git.Branch.lookup(repo, '7.x', git.Branch.BRANCH.LOCAL).then(function(branchRef) {
       var signature = git.Signature.default(repo);
-      git.Branch.move(branchRef, 'master', true, signature, null).then(function(reference) {
+      git.Branch.move(branchRef, 'master', 0, signature, 'Renamed 7.x to master').then(function(reference) {
         console.log('Done');
+        done();
       });
     });
   },
