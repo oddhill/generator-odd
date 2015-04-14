@@ -138,6 +138,16 @@ module.exports = generators.Base.extend({
         done();
       }
     });
+  },
+
+  end: function () {
+    this.log('All done!');
+    
+    // Exit the process
+    // This needs to be done because of a bug in the nodegit lib.
+    // The nodegit process never exits..
+    // https://github.com/nodegit/nodegit/issues/497
+    process.exit();
   }
 
 });
