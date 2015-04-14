@@ -12,8 +12,9 @@ module.exports = generators.Base.extend({
   // Download the oddbaby
   download: function () {
     var done = this.async();
+    var self = this;
 
-    this.log('Downloading Oddbaby...');
+    self.log('Downloading Oddbaby...');
 
     // Download odd baby and put it in sites/all/themes/NAME
     var options = {
@@ -27,17 +28,18 @@ module.exports = generators.Base.extend({
     git.Clone.clone('https://github.com/oddhill/oddbaby.git', './', options).then(function(repository) {
       // Remove .git
       fse.unlink('./.git', function() {
-        this.log('Done');
+        self.log('Done');
         done();
       });
     });
   },
 
   rename: function () {
+    var self = this;
     // Rename oddbaby.info till NAME.info.
     fse.move('oddbaby.info', theme_name + '.info', function(err) {
       if (!err) {
-        this.log('Renamed oddbaby.info to ' + theme_name + '.info');
+        self.log('Renamed oddbaby.info to ' + theme_name + '.info');
 
         // @TODO:
         // Rename Odd baby name in info file.
