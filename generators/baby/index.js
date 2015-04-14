@@ -53,7 +53,8 @@ module.exports = generators.Base.extend({
 
         for (name in files) {
           replace({
-            regex: '/(oddbaby)/i',
+            regex: 'oddbaby',
+            ignoreCase: true,
             replacement: theme_name,
             paths: [files[name]],
             silent: true
