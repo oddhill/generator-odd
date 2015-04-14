@@ -1,5 +1,5 @@
 # generator-odd
-Yo.Odd
+Yeoman generator for [Odddrupal](https://github.com/oddhill/odddrupal) and [Oddbaby](https://github.com/oddhill/oddbaby)
 
 ## Install
 ```
@@ -9,5 +9,6 @@ npm install -g generator-odd
 ## How to use
 
 ```
-yo odd:drupal && yo odd:baby
+cd Sites/odd && yo odd:drupal
+cd Sites/odd/sites/all/themes/odd && yo odd:baby
 ```
