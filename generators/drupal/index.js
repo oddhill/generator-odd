@@ -15,17 +15,18 @@ module.exports = generators.Base.extend({
   // Clone https://github.com/oddhill/odddrupal.git.
   // And rename origin to odddrupal.
   clone: function () {
+    var self = this;
     var done = this.async();
     // Check if cwd is empty or not.
     var files = fse.readdirSync(cwd);
     if (files.length > 0) {
       // quit
-      console.error('Current dir not empty! Emergency, quits.');
+      self.log('Current dir not empty! Emergency, quits.');
       process.exit();
       return;
     }
     
-    console.log('Cloning odddrupal to ' + cwd + '...');
+    self.log('Cloning odddrupal to ' + cwd + '...');
 
     // Clone odddrupal to cwd
     var options = {
@@ -47,10 +48,10 @@ module.exports = generators.Base.extend({
       var command = 'cd ' + cwd + ' && git remote rm origin';
       exec(command, function(err, stdout, stderr) {
         if (!err) {
-          console.log('Done');
+          self.log('Done');
         }
         else {
-          console.error('Unable to remove origin remote reference.');
+          self.log('Unable to remove origin remote reference.');
         }
 
         // Continue
@@ -61,13 +62,14 @@ module.exports = generators.Base.extend({
 
   // Rename current branch to master
   createMaster: function () {
+    var self = this;
     var done = this.async();
-    console.log('Renaming the 7.x branch to master...');
+    self.log('Renaming the 7.x branch to master...');
     // Rename current local branch to master
     git.Branch.lookup(repo, '7.x', git.Branch.BRANCH.LOCAL).then(function(branchRef) {
       var signature = git.Signature.default(repo);
       git.Branch.move(branchRef, 'master', 0, signature, 'Renamed 7.x to master').then(function(reference) {
-        console.log('Done');
+        self.log('Done');
         done();
       });
     });
@@ -77,10 +79,11 @@ module.exports = generators.Base.extend({
 
   // Copy .htaccess.default to .htaccess.
   htaccess: function () {
+    var self = this;
     var done = this.async();
     fse.copy(cwd + '/.htaccess.default', cwd + '/.htaccess', function(err) {
       if (!err) {
-        console.log('Copied .htaccess.default to .htaccess');
+        self.log('Copied .htaccess.default to .htaccess');
         done();
       }
     });
@@ -88,10 +91,11 @@ module.exports = generators.Base.extend({
 
   // Copy sites/default/settings.local.php.default to settings.local.php.
   dbSettings: function () {
+    var self = this;
     var done = this.async();
     fse.copy(cwd + '/sites/default/settings.local.php.default', cwd + '/sites/default/settings.local.php', function(err) {
       if (!err) {
-        console.log('Copied settings.local.php.default to settings.local.php');
+        self.log('Copied settings.local.php.default to settings.local.php');
 
         done();
       }
@@ -100,11 +104,12 @@ module.exports = generators.Base.extend({
 
   // Make sure the files folder (sites/all/files) is 777.
   filesChmod: function () {
+    var self = this;
     var done = this.async();
     fse.ensureDir(cwd + '/sites/all/files', function(err) {
       if (!err) {
         fse.chmodSync(cwd + '/sites/all/files', 777);
-        console.log('Created files dir');
+        self.log('Created files dir');
 
         // Continue
         done();
