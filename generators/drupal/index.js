@@ -21,6 +21,7 @@ module.exports = generators.Base.extend({
     if (files.length > 0) {
       // quit
       console.error('Current dir not empty! Emergency, quits.');
+      process.exit();
       return;
     }
     
