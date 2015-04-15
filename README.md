@@ -12,3 +12,7 @@ npm install -g generator-odd
 cd Sites/odd && yo odd:drupal
 cd Sites/odd/sites/all/themes/odd && yo odd:baby
 ```
+
+## Todo
+- Add support for user inputs
+- Write tests
