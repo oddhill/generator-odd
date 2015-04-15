@@ -1,6 +1,6 @@
 {
   "name": "generator-odd",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Yo generator for odd (hill) things :)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
