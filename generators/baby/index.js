@@ -59,6 +59,8 @@ module.exports = generators.Base.extend({
             paths: [files[name]],
             silent: true
           });
+
+          self.log('Replaced oddbaby in ' + files[name]);
         }
       }
     });
