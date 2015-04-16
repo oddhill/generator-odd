@@ -27,7 +27,7 @@ module.exports = generators.Base.extend({
 
     git.Clone.clone('https://github.com/oddhill/oddbaby.git', './', options).then(function(repository) {
       // Remove .git
-      fse.unlink('./.git', function() {
+      fse.remove('./.git', function(err) {
         self.log('Done');
         done();
       });
