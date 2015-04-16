@@ -1,6 +1,6 @@
 {
   "name": "generator-odd",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Yo generator for odd (hill) things :)",
   "scripts": {
     "test": "mocha"
