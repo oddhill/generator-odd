@@ -41,4 +41,41 @@ describe('generator-odd', function () {
 
   });
 
+  describe('When generating Odddrupal', function () {
+
+    before(function (done) {
+      // Run the generator
+      helpers.run(path.join(__dirname, '../generators/drupal'))
+        .inDir(path.join(__dirname, './tmp'))
+        .on('end', function () {
+          done();
+        });
+    });
+
+    it('Clone Odddrupal', function () {
+
+    });
+
+    it('Should remove remote reference', function () {
+
+    });
+
+    it('Rename 7.x to master', function () {
+
+    });
+
+    it('Should create .htaccess file', function () {
+
+    });
+
+    it('Should create settings.local.php file', function () {
+
+    });
+
+    it('Should change permission on files dir', function () {
+
+    });
+
+  });
+
 });
