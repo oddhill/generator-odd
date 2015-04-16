@@ -13,6 +13,12 @@ cd Sites/odd && yo odd:drupal
 cd Sites/odd/sites/all/themes/odd && yo odd:baby
 ```
 
+## Tests
+Using mocha for tests.
+```
+npm test
+```
+
 ## Todo
 - Add support for user inputs
 - Write tests
