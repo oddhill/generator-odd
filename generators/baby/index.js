@@ -1,6 +1,5 @@
 var generators = require('yeoman-generator');
 var fse = require('fs-extra');
-var git = require('nodegit');
 var replace = require('replace');
 
 var cwd = process.cwd();
@@ -25,7 +24,8 @@ module.exports = generators.Base.extend({
       }
     };
 
-    git.Clone.clone('https://github.com/oddhill/oddbaby.git', './', options).then(function(repository) {
+    var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/oddbaby.git', './'])
+    clone.on('close', function () {
       // Remove .git
       fse.remove('./.git', function(err) {
         self.log('Done');
@@ -73,12 +73,6 @@ module.exports = generators.Base.extend({
 
   end: function () {
     this.log('All done!');
-
-    // Exit the process
-    // This needs to be done because of a bug in the nodegit lib.
-    // The nodegit process never exits..
-    // https://github.com/nodegit/nodegit/issues/497
-    process.exit();
   }
 
 });
