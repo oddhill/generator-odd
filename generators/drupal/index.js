@@ -1,9 +1,7 @@
 var generators = require('yeoman-generator');
 var fse = require('fs-extra');
-var exec = require('child_process').exec;
 
 // Vars
-var repo = null;
 var cwd = process.cwd();
 
 module.exports = generators.Base.extend({
@@ -39,7 +37,6 @@ module.exports = generators.Base.extend({
         else {
           self.log('Unable to remove origin remote reference. Code: ' + code);
         }
-
         // Continue
         done();
       });
