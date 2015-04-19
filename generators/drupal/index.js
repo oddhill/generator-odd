@@ -1,6 +1,5 @@
 var generators = require('yeoman-generator');
 var fse = require('fs-extra');
-var mysql = require('mysql');
 var exec = require('child_process').exec;
 
 // Vars
