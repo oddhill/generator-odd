@@ -53,23 +53,23 @@ describe('generator-odd', function () {
     });
 
     it('Should remove remote reference', function () {
-
+      return false;
     });
 
     it('Rename 7.x to master', function () {
-
+      return false;
     });
 
     it('Should create .htaccess file', function () {
-
+      return false;
     });
 
     it('Should create settings.local.php file', function () {
-
+      return false;
     });
 
     it('Should change permission on files dir', function () {
-
+      return false;
     });
 
   });
