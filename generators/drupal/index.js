@@ -32,12 +32,12 @@ module.exports = generators.Base.extend({
     clone.on('close', function () {
       // Remove origin remote ref
       var rmRemote = self.spawnCommand('git', ['remote', 'rm', 'origin'], {cwd: cwd});
-      rmRemote.on('close', function () {
-        if (!err) {
+      rmRemote.on('close', function (code) {
+        if (!code) {
           self.log('Done');
         }
         else {
-          self.log('Unable to remove origin remote reference.');
+          self.log('Unable to remove origin remote reference. Code: ' + code);
         }
 
         // Continue
