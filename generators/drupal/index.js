@@ -15,6 +15,7 @@ module.exports = generators.Base.extend({
   clone: function () {
     var self = this;
     var done = this.async();
+    
     // Check if cwd is empty or not.
     var files = fse.readdirSync(cwd);
     if (files.length > 0) {
@@ -27,14 +28,6 @@ module.exports = generators.Base.extend({
     self.log('Cloning odddrupal to ' + cwd + '...');
 
     // Clone odddrupal to cwd
-    var options = {
-      remoteCallbacks: {
-        certificateCheck: function() {
-          return 1;
-        }
-      }
-    };
-
     var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/odddrupal.git', cwd]);
     clone.on('close', function () {
       // Remove origin remote ref
