@@ -51,7 +51,7 @@ describe('generator-odd', function () {
     });
 
     it('Clone Odddrupal', function () {
-      assert.file(__dirname + '/tmp/index.php');
+      assert.file(path.join(__dirname, '/tmp/drupal/index.php'));
     });
 
     it('Should remove remote reference', function () {
