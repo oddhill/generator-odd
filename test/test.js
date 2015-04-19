@@ -35,10 +35,6 @@ describe('generator-odd', function () {
       }
     });
 
-    after(function () {
-      process.exit();
-    });
-
   });
 
   describe('When generating Odddrupal', function () {
