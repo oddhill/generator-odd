@@ -36,6 +36,12 @@ describe('generator-odd', function () {
       }
     });
 
+    after(function (done) {
+      fse.remove(path.join(__dirname, './tmp'), function () {
+        done();
+      });
+    });
+
   });
 
   describe('When generating Odddrupal', function () {
