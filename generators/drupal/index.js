@@ -1,5 +1,4 @@
 var generators = require('yeoman-generator');
-var git = require('nodegit');
 var fse = require('fs-extra');
 var mysql = require('mysql');
 var exec = require('child_process').exec;
@@ -37,16 +36,11 @@ module.exports = generators.Base.extend({
       }
     };
 
-    git.Clone.clone('https://github.com/oddhill/odddrupal.git', cwd, options).then(function(repository) {
-      // Make sure we can use it later.
-      repo = repository;
-
-      // @TODO
-      // The removal sohuld probably be done through nodegit, instead.
-
+    var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/odddrupal.git', cwd]);
+    clone.on('close', function () {
       // Remove origin remote ref
-      var command = 'cd ' + cwd + ' && git remote rm origin';
-      exec(command, function(err, stdout, stderr) {
+      var rmRemote = self.spawnCommand('git', ['remote', 'rm', 'origin'], {cwd: cwd});
+      rmRemote.on('close', function () {
         if (!err) {
           self.log('Done');
         }
@@ -66,12 +60,10 @@ module.exports = generators.Base.extend({
     var done = this.async();
     self.log('Renaming the 7.x branch to master...');
     // Rename current local branch to master
-    git.Branch.lookup(repo, '7.x', git.Branch.BRANCH.LOCAL).then(function(branchRef) {
-      var signature = git.Signature.default(repo);
-      git.Branch.move(branchRef, 'master', 0, signature, 'Renamed 7.x to master').then(function(reference) {
-        self.log('Done');
-        done();
-      });
+    var rename = self.spawnCommand('git', ['branch', '-m', '7.x', 'master']);
+    rename.on('close', function () {
+      self.log('Done');
+      done();
     });
   },
 
