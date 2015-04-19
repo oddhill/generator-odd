@@ -8,6 +8,7 @@ describe('generator-odd', function () {
   describe('When generating Oddbaby', function () {
 
     before(function (done) {
+      this.timeout(10000);
       // Run the generator
       helpers.run(path.join(__dirname, '../generators/baby'))
         .inDir(path.join(__dirname, './tmp'))
@@ -40,6 +41,7 @@ describe('generator-odd', function () {
   describe('When generating Odddrupal', function () {
 
     before(function (done) {
+      this.timeout(0);
       // Run the generator
       helpers.run(path.join(__dirname, '../generators/drupal'))
         .inDir(path.join(__dirname, './tmp'))
