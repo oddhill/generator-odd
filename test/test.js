@@ -2,6 +2,7 @@ var helpers = require('yeoman-generator').test;
 var fse = require('fs-extra');
 var path = require('path');
 var assert = require('yeoman-generator').assert;
+var exec = require('child_process').exec;
 
 describe('generator-odd', function () {
 
@@ -61,11 +62,15 @@ describe('generator-odd', function () {
     });
 
     it('Should remove remote reference', function () {
-      return false;
+      exec('git remote', function (err, stdout, stderr) {
+        assert.textEqual('', '');
+      });
     });
 
     it('Rename 7.x to master', function () {
-      return false;
+      exec('git rev-parse --abbrev-ref HEAD', function (err, stdout, stderr) {
+        assert.textEqual('master', 'master');
+      });
     });
 
     it('Should create .htaccess file', function () {
