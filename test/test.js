@@ -73,7 +73,11 @@ describe('generator-odd', function () {
     });
 
     it('Should create settings.local.php file', function () {
-      return false;
+      assert.file(path.join(__dirname, '/tmp/sites/default/settings.local.php'));
+    });
+
+    it('Ensure files dir', function () {
+      assert.file(path.join(__dirname, '/tmp/sites/all/files'));
     });
 
     it('Should change permission on files dir', function (done) {
