@@ -83,6 +83,12 @@ describe('generator-odd', function () {
         done();
       });
     });
+
+    after(function (done) {
+      // Make sure tmp folder is removed.
+      fse.remove(path.join(__dirname, './tmp'), function (err) {
+        done();
+      });
     });
 
   });
