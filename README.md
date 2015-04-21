@@ -21,4 +21,3 @@ npm test
 
 ## Todo
 - Add support for user inputs
-- Write tests
