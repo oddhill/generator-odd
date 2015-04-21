@@ -89,11 +89,14 @@ module.exports = generators.Base.extend({
     var done = this.async();
     fse.ensureDir(cwd + '/sites/all/files', function(err) {
       if (!err) {
-        fse.chmodSync(cwd + '/sites/all/files', 777);
         self.log('Created files dir');
+        // Make sure files folder is 777
+        fse.chmod(cwd + '/sites/all/files', '777', function () {
+          self.log('Changed permissions on files dir to 777.');
 
-        // Continue
-        done();
+          // Continue
+          done();
+        });
       }
     });
   },
