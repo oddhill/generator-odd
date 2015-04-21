@@ -69,7 +69,7 @@ describe('generator-odd', function () {
     });
 
     it('Should create .htaccess file', function () {
-      return false;
+      assert.file(path.join(__dirname, '/tmp/.htaccess'));
     });
 
     it('Should create settings.local.php file', function () {
