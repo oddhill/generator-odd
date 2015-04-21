@@ -76,8 +76,13 @@ describe('generator-odd', function () {
       return false;
     });
 
-    it('Should change permission on files dir', function () {
-      return false;
+    it('Should change permission on files dir', function (done) {
+      // Make sure files folder is 777
+      fse.stat(path.join(__dirname, '/tmp/sites/all/files'), function (err, stats) {
+        assert.textEqual('40777', parseInt(stats.mode.toString(8), 10).toString());
+        done();
+      });
+    });
     });
 
   });
