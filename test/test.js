@@ -30,6 +30,10 @@ describe('generator-odd', function () {
       assert.file(path.join(__dirname, './tmp/tmp.info'));
     });
 
+    it('Should rename "Odd Baby" in .info file', function () {
+      assert.noFileContent(path.join(__dirname, './tmp/tmp.info'), 'Odd Baby');
+    });
+
     it('Should replace the word "oddbaby" in various files', function () {
       var files = ['template.php', 'preprocess.inc', 'theme.inc', 'js/main.js'];
       for (file in files) {

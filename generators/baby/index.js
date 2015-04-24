@@ -41,8 +41,14 @@ module.exports = generators.Base.extend({
       if (!err) {
         self.log('Renamed oddbaby.info to ' + theme_name + '.info');
 
-        // @TODO:
         // Rename Odd baby name in info file.
+        replace({
+          regex: 'odd baby',
+          ignoreCase: true,
+          replacement: theme_name,
+          paths: [theme_name + '.info'],
+          silent: true
+        });
 
         // template.php - Replace the word "oddbaby" to NAME
         // preprocess.inc - Replace the word "oddbaby" to NAME
