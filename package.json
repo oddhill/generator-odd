@@ -1,6 +1,6 @@
 {
   "name": "generator-odd",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Yo generator for odd things.",
   "scripts": {
     "test": "mocha"
@@ -13,9 +13,7 @@
     "yeoman-generator"
   ],
   "files": [
-    "app",
-    "drupal",
-    "baby"
+    "generators"
   ],
   "author": "Jens Lind <jens@jensl.se> (jenslind.org)",
   "license": "MIT",
