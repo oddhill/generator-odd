@@ -1,4 +1,5 @@
-# generator-odd
+# generator-odd [![Build Status](https://travis-ci.org/oddhill/generator-odd.svg?branch=master)](https://travis-ci.org/oddhill/generator-odd)
+
 Yeoman generator for [Odddrupal](https://github.com/oddhill/odddrupal) and [Oddbaby](https://github.com/oddhill/oddbaby)
 
 ## Install
