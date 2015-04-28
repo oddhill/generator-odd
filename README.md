@@ -9,9 +9,10 @@ npm install -g generator-odd
 ## How to use
 
 ```
-cd Sites/odd && yo odd:drupal
-cd Sites/odd/sites/all/themes/odd && yo odd:baby
+yo odd:drupal
+yo odd:baby
 ```
+Files and folders will be put in the cwd.
 
 ## Tests
 Using mocha for tests.
