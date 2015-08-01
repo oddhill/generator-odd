@@ -3,7 +3,12 @@
   "version": "0.3.2",
   "description": "Yo generator for odd things.",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "standard && ./node_modules/mocha/bin/mocha"
+  },
+  "standard": {
+    "ignore": [
+      "test/test.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -27,6 +32,7 @@
     "yeoman-generator": "^0.19.1"
   },
   "devDependencies": {
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "standard": "^4.5.4"
   }
 }

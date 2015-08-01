@@ -1,8 +1,8 @@
-var generators = require('yeoman-generator');
-var fse = require('fs-extra');
+var generators = require('yeoman-generator')
+var fse = require('fs-extra')
 
 // Vars
-var cwd = process.cwd();
+var cwd = process.cwd()
 
 module.exports = generators.Base.extend({
 
@@ -11,98 +11,97 @@ module.exports = generators.Base.extend({
   // Clone https://github.com/oddhill/odddrupal.git.
   // And rename origin to odddrupal.
   clone: function () {
-    var self = this;
-    var done = this.async();
+    var self = this
+    var done = this.async()
 
     // Check if cwd is empty or not.
-    var files = fse.readdirSync(cwd);
+    var files = fse.readdirSync(cwd)
     if (files.length > 0) {
       // quit
-      self.log('Current dir not empty! Emergency, quits.');
-      process.exit();
-      return;
+      self.log('Current dir not empty! Emergency, quits.')
+      process.exit()
+      return
     }
 
-    self.log('Cloning odddrupal to ' + cwd + '...');
+    self.log('Cloning odddrupal to ' + cwd + '...')
 
     // Clone odddrupal to cwd
-    var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/odddrupal.git', cwd]);
+    var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/odddrupal.git', cwd])
     clone.on('close', function () {
       // Remove origin remote ref
-      var rmRemote = self.spawnCommand('git', ['remote', 'rm', 'origin'], {cwd: cwd});
+      var rmRemote = self.spawnCommand('git', ['remote', 'rm', 'origin'], {cwd: cwd})
       rmRemote.on('close', function (code) {
         if (!code) {
-          self.log('Done');
-        }
-        else {
-          self.log('Unable to remove origin remote reference. Code: ' + code);
+          self.log('Done')
+        } else {
+          self.log('Unable to remove origin remote reference. Code: ' + code)
         }
         // Continue
-        done();
-      });
-    });
+        done()
+      })
+    })
   },
 
   // Rename current branch to master
   createMaster: function () {
-    var self = this;
-    var done = this.async();
-    self.log('Renaming the 7.x branch to master...');
+    var self = this
+    var done = this.async()
+    self.log('Renaming the 7.x branch to master...')
     // Rename current local branch to master
-    var rename = self.spawnCommand('git', ['branch', '-m', '7.x', 'master']);
+    var rename = self.spawnCommand('git', ['branch', '-m', '7.x', 'master'])
     rename.on('close', function () {
-      self.log('Done');
-      done();
-    });
+      self.log('Done')
+      done()
+    })
   },
 
   // ## Install odddrupal
 
   // Copy .htaccess.default to .htaccess.
   htaccess: function () {
-    var self = this;
-    var done = this.async();
-    fse.copy(cwd + '/.htaccess.default', cwd + '/.htaccess', function(err) {
+    var self = this
+    var done = this.async()
+    fse.copy(cwd + '/.htaccess.default', cwd + '/.htaccess', function (err) {
       if (!err) {
-        self.log('Copied .htaccess.default to .htaccess');
-        done();
+        self.log('Copied .htaccess.default to .htaccess')
+        done()
       }
-    });
+    })
   },
 
   // Copy sites/default/settings.local.php.default to settings.local.php.
   dbSettings: function () {
-    var self = this;
-    var done = this.async();
-    fse.copy(cwd + '/sites/default/settings.local.php.default', cwd + '/sites/default/settings.local.php', function(err) {
+    var self = this
+    var done = this.async()
+    fse.copy(cwd + '/sites/default/settings.local.php.default', cwd + '/sites/default/settings.local.php', function (err) {
       if (!err) {
-        self.log('Copied settings.local.php.default to settings.local.php');
+        self.log('Copied settings.local.php.default to settings.local.php')
 
-        done();
+        done()
       }
-    });
+    })
   },
 
   // Make sure the files folder (sites/all/files) is 777.
   filesChmod: function () {
-    var self = this;
-    var done = this.async();
-    fse.ensureDir(cwd + '/sites/all/files', function(err) {
+    var self = this
+    var done = this.async()
+    fse.ensureDir(cwd + '/sites/all/files', function (err) {
       if (!err) {
-        self.log('Created files dir');
+        self.log('Created files dir')
         // Make sure files folder is 777
         fse.chmod(cwd + '/sites/all/files', '777', function () {
-          self.log('Changed permissions on files dir to 777.');
+          self.log('Changed permissions on files dir to 777.')
 
           // Continue
-          done();
-        });
+          done()
+        })
       }
-    });
+    })
   },
 
   end: function () {
-    this.log('All done!');
+    this.log('All done!')
   }
 
-});
+})
