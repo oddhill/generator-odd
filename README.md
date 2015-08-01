@@ -1,5 +1,4 @@
-# generator-odd [![Build Status](https://travis-ci.org/oddhill/generator-odd.svg?branch=master)](https://travis-ci.org/oddhill/generator-odd)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+# generator-odd [![Build Status](https://travis-ci.org/oddhill/generator-odd.svg?branch=master)](https://travis-ci.org/oddhill/generator-odd) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 Yeoman generator for [Odddrupal](https://github.com/oddhill/odddrupal) and [Oddbaby](https://github.com/oddhill/oddbaby)
 
