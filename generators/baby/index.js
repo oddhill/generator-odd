@@ -20,7 +20,7 @@ module.exports = generators.Base.extend({
       theme_path = path.join(cwd, answers.name)
       theme_name = answers.name
       done()
-    }.bind(this))
+    })
   },
 
   // Download the oddbaby
