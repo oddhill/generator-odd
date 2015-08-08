@@ -1,12 +1,27 @@
 var generators = require('yeoman-generator')
 var fse = require('fs-extra')
 var replace = require('replace')
+var path = require('path')
 
 var cwd = process.cwd()
-var theme_name = cwd.split('/')
-theme_name = theme_name[theme_name.length - 1]
+var theme_path = cwd
+var theme_name
 
 module.exports = generators.Base.extend({
+
+  prompting: function () {
+    var done = this.async()
+    this.prompt({
+      type: 'input',
+      name: 'name',
+      message: 'Your theme name',
+      default: 'oddbaby'
+    }, function (answers) {
+      theme_path = path.join(cwd, answers.name)
+      theme_name = answers.name
+      done()
+    }.bind(this))
+  },
 
   // Download the oddbaby
   download: function () {
@@ -16,10 +31,10 @@ module.exports = generators.Base.extend({
     self.log('Downloading Oddbaby...')
 
     // Download odd baby and put it in sites/all/themes/NAME
-    var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/oddbaby.git', './'])
+    var clone = self.spawnCommand('git', ['clone', 'https://github.com/oddhill/oddbaby.git', theme_path])
     clone.on('close', function () {
       // Remove .git
-      fse.remove('./.git', function (err) {
+      fse.remove(path.join(theme_path, '.git'), function (err) {
         if (!err) {
           self.log('Done')
           done()
@@ -31,7 +46,7 @@ module.exports = generators.Base.extend({
   rename: function () {
     var self = this
     // Rename oddbaby.info till NAME.info.
-    fse.move('oddbaby.info', theme_name + '.info', function (err) {
+    fse.move(path.join(theme_path, 'oddbaby.info'), path.join(theme_path, theme_name + '.info'), function (err) {
       if (!err) {
         self.log('Renamed oddbaby.info to ' + theme_name + '.info')
 
@@ -40,7 +55,7 @@ module.exports = generators.Base.extend({
           regex: 'odd baby',
           ignoreCase: true,
           replacement: theme_name,
-          paths: [theme_name + '.info'],
+          paths: [path.join(theme_path, theme_name + '.info')],
           silent: true
         })
 
@@ -56,7 +71,7 @@ module.exports = generators.Base.extend({
             regex: 'oddbaby',
             ignoreCase: true,
             replacement: theme_name,
-            paths: [files[name]],
+            paths: [path.join(theme_path, files[name])],
             silent: true
           })
 
@@ -68,7 +83,8 @@ module.exports = generators.Base.extend({
 
   install: function () {
     // Run npm-install
-    this.npmInstall()
+    this.destinationRoot(theme_path)
+    this.installDependencies({bower: false})
   },
 
   end: function () {
