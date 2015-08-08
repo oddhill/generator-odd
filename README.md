@@ -10,8 +10,8 @@ npm install -g generator-odd
 ## How to use
 
 ```
-yo odd:drupal
-yo odd:baby
+yo odd:drupal site-name
+yo odd:baby theme-name
 ```
 Files and folders will be put in the cwd.
 
@@ -20,6 +20,3 @@ Using mocha for tests.
 ```
 npm test
 ```
-
-## Todo
-- Add support to set the name from an argument
