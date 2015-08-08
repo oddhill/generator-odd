@@ -9,8 +9,20 @@ var theme_name
 
 module.exports = generators.Base.extend({
 
+  constructor: function () {
+    generators.Base.apply(this, arguments)
+    this.argument('name', {type: String, required: false})
+  },
+
   prompting: function () {
     var done = this.async()
+
+    if (this.name) {
+      theme_path = path.join(cwd, this.name)
+      theme_name = this.name
+      return done()
+    }
+
     this.prompt({
       type: 'input',
       name: 'name',
