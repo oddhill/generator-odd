@@ -22,4 +22,4 @@ npm test
 ```
 
 ## Todo
-- Add support for user inputs
+- Add support to set the name from an argument
