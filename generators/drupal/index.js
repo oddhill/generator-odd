@@ -8,8 +8,19 @@ var site_path
 
 module.exports = generators.Base.extend({
 
+  constructor: function () {
+    generators.Base.apply(this, arguments)
+    this.argument('name', {type: String, required: false})
+  },
+
   prompting: function () {
     var done = this.async()
+
+    if (this.name) {
+      site_path = path.join(cwd, this.name)
+      return done()
+    }
+
     this.prompt({
       type: 'input',
       name: 'name',
