@@ -35,7 +35,6 @@
     "yeoman-generator": "^0.19.1"
   },
   "devDependencies": {
-    "mocha": "^2.2.4",
     "standard": "^4.5.4"
   }
 }
