@@ -1,11 +1,16 @@
+'use strict'
+
 const generators = require('yeoman-generator')
-const fse = require('fs-extra')
 const replace = require('replace')
 const path = require('path')
+const got = require('got')
+const semver = require('semver')
+const zlib = require('zlib')
+const tar = require('tar')
 
 const cwd = process.cwd()
-let theme_path = cwd
-let theme_name
+let THEME_PATH = cwd
+let THEME_NAME
 
 module.exports = generators.Base.extend({
 
@@ -18,8 +23,8 @@ module.exports = generators.Base.extend({
     let done = this.async()
 
     if (this.name) {
-      theme_path = path.join(cwd, this.name)
-      theme_name = this.name
+      THEME_PATH = path.join(cwd, this.name)
+      THEME_NAME = this.name
       return done()
     }
 
@@ -29,8 +34,8 @@ module.exports = generators.Base.extend({
       message: 'Your theme name',
       default: 'oddbaby'
     }, function (answers) {
-      theme_path = path.join(cwd, answers.name)
-      theme_name = answers.name
+      THEME_PATH = path.join(cwd, answers.name)
+      THEME_NAME = answers.name
       done()
     })
   },
@@ -42,12 +47,25 @@ module.exports = generators.Base.extend({
 
     self.log('Downloading Oddbaby...')
 
-    // @TODO:
-    // - Get latest oddbaby-8 release from the api: /repos/:owner/:repo/releases/latest
-    // - Download and extract the zip to public/themes
+    // Get latest oddbaby-8 release from the api: /repos/:owner/:repo/releases/latest
+    got('https://api.github.com/repos/oddhill/oddbaby-8/tags', { json: true, headers: { 'accept': 'application/vnd.github.v3+json' } })
+      .then(function (res) {
+        let versions = res.body.sort(function (a, b) {
+          return semver.compare(b.name, a.name)
+        })
 
-    self.log('Done')
-    done()
+        return versions[0].tarball_url
+      })
+      .then(function (tarURL) {
+        // Download and extract the zip to public/themes
+        got.stream(tarURL)
+          .pipe(zlib.Unzip())
+          .pipe(tar.Extract({ path: THEME_PATH, strip: 1 }))
+          .on('end', function () {
+            self.log('Done')
+            done()
+          })
+      })
   },
 
   renameFiles: function () {
