@@ -16,7 +16,6 @@ yo odd:baby theme-name
 Files and folders will be put in the cwd.
 
 ## Tests
-Using mocha for tests.
 ```
 npm test
 ```
