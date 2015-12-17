@@ -69,19 +69,27 @@ module.exports = generators.Base.extend({
       })
   },
 
+  renameFilesContent: function () {
+    // Replace oddbaby in the following files
+    let files = ['oddbaby.breakpoints.yml', 'oddbaby.info.yml', 'oddbaby.theme']
+    files.map(function (file, index) {
+      files[index] = path.join(THEME_PATH, file)
+    })
+
+    replace({
+      regex: 'oddbaby',
+      replacement: THEME_NAME,
+      paths: files,
+      silent: true
+    })
+  },
+
   renameFiles: function () {
     // Rename oddbaby.* files.
     let files = ['oddbaby.breakpoints.yml', 'oddbaby.info.yml', 'oddbaby.libraries.yml', 'oddbaby.theme']
-    for (let file in files) {
-      fs.renameSync(path.join(THEME_PATH, files[file]), path.join(THEME_PATH, files[file].replace(/[^.]*/, THEME_NAME)))
-    }
-  },
-
-  renameFilesContent: function () {
-    // @TODO:
-    // - Rename `oddbaby` in oddbaby.info.yml
-    // - Rename `oddbaby` in oddbaby.breakpoints.yml
-    // - Rename `oddbaby` in oddbaby.theme
+    files.map(function (file) {
+      fs.renameSync(path.join(THEME_PATH, file), path.join(THEME_PATH, file.replace(/[^.]*/, THEME_NAME)))
+    })
   },
 
   install: function () {
