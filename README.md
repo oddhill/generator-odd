@@ -10,7 +10,6 @@ npm install -g generator-odd
 ## How to use
 
 ```
-yo odd:drupal site-name
 yo odd:baby theme-name
 ```
 Files and folders will be put in the cwd.
