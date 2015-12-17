@@ -28,7 +28,10 @@
   "homepage": "https://github.com/oddhill/generator-odd",
   "dependencies": {
     "fs-extra": "^0.18.0",
+    "got": "^5.2.1",
     "replace": "^0.3.0",
+    "semver": "^5.1.0",
+    "tar": "^2.2.1",
     "yeoman-generator": "^0.19.1"
   },
   "devDependencies": {
