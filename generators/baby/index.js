@@ -7,6 +7,7 @@ const got = require('got')
 const semver = require('semver')
 const zlib = require('zlib')
 const tar = require('tar')
+const fs = require('fs')
 
 const cwd = process.cwd()
 let THEME_PATH = cwd
@@ -69,12 +70,11 @@ module.exports = generators.Base.extend({
   },
 
   renameFiles: function () {
-    // @TODO:
-    // - Rename oddbaby.* files.
-    // - oddbaby.breakpoints.yml
-    // - oddbaby.info.yml
-    // - oddbaby.libraries.yml
-    // - oddbaby.theme
+    // Rename oddbaby.* files.
+    let files = ['oddbaby.breakpoints.yml', 'oddbaby.info.yml', 'oddbaby.libraries.yml', 'oddbaby.theme']
+    for (let file in files) {
+      fs.renameSync(path.join(THEME_PATH, files[file]), path.join(THEME_PATH, files[file].replace(/[^.]*/, THEME_NAME)))
+    }
   },
 
   renameFilesContent: function () {
@@ -86,7 +86,7 @@ module.exports = generators.Base.extend({
 
   install: function () {
     // Run npm-install
-    this.destinationRoot(theme_path)
+    this.destinationRoot(THEME_PATH)
     this.installDependencies({bower: false})
   },
 
