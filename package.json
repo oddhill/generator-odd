@@ -1,6 +1,6 @@
 {
   "name": "generator-odd",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Yo generator for odd things.",
   "scripts": {
     "test": "standard"
