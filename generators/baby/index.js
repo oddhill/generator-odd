@@ -82,6 +82,8 @@ module.exports = generators.Base.extend({
       paths: files,
       silent: true
     })
+
+    this.log('Renamed files')
   },
 
   renameFiles: function () {
@@ -90,6 +92,8 @@ module.exports = generators.Base.extend({
     files.map(function (file) {
       fs.renameSync(path.join(THEME_PATH, file), path.join(THEME_PATH, file.replace(/[^.]*/, THEME_NAME)))
     })
+
+    this.log('Replaced `oddbaby` with `' + THEME_NAME + '` in files')
   },
 
   install: function () {
@@ -101,5 +105,4 @@ module.exports = generators.Base.extend({
   end: function () {
     this.log('All done!')
   }
-
 })
